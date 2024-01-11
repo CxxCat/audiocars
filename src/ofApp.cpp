@@ -5,12 +5,13 @@ ofApp::ofApp(): road(camera)
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    road.setup();
     camera.setup();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    camera.update();
 }
 
 //--------------------------------------------------------------
@@ -34,10 +35,10 @@ void ofApp::keyPressed(int key){
             camera.position -= kSpeedZ;
             break;
         case OF_KEY_LEFT:
-            camera.position += kSpeedX;
+            camera.position -= kSpeedX;
             break;
         case OF_KEY_RIGHT:
-            camera.position -= kSpeedX;
+            camera.position += kSpeedX;
             break;
         case 'a':
             camera.position += kSpeedY;
