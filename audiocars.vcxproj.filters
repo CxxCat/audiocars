@@ -13,6 +13,12 @@
     <ClCompile Include="src\camera.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\road_segment.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tree.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -27,6 +33,15 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\camera.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\idrawable.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\road_segment.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tree.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -108,11 +108,16 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\road.cpp" />
+    <ClCompile Include="src\road_segment.cpp" />
+    <ClCompile Include="src\tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\camera.h" />
+    <ClInclude Include="src\idrawable.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\road.h" />
+    <ClInclude Include="src\road_segment.h" />
+    <ClInclude Include="src\tree.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

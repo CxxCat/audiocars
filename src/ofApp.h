@@ -1,8 +1,7 @@
 #pragma once
 
-#include "ofMain.h"
-
 #include "camera.h"
+#include "ofMain.h"
 #include "road.h"
 
 class ofApp : public ofBaseApp{

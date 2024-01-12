@@ -2,6 +2,7 @@
 
 #include <algorithm>
 
+#include "idrawable.h"
 #include "ofMain.h"
 
 ofVec2f Camera::worldToScreen(const ofVec3f& w) const {
