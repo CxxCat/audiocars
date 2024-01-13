@@ -27,9 +27,9 @@ class ofApp : public ofBaseApp{
 
     private:
 
-        const ofVec3f kSpeedX = ofVec3f(1.f, 0.f, 0.f);
-        const ofVec3f kSpeedY = ofVec3f(0.f, 1.f, 0.f);
-        const ofVec3f kSpeedZ = ofVec3f(0.f, 0.f, 1.f);
+        const float kSpeed = 72.22f;
+
+        ofVec3f direction = ofVec3f(0.f, 0.f, 0.f);
 
         Camera camera;
         Road road;

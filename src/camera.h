@@ -21,8 +21,11 @@ class Camera {
         void update();
         void draw();
 
+        float alpha(float order) const;
+
     private:
         const float kCarWidth = 2.f;
+        const float kAlpha = 8.f;
 
         ofVec3f scale = ofVec3f(1.f, 1.f, 1.f);
         ofImage carImg;

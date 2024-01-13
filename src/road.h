@@ -16,7 +16,6 @@ class Road {
 
     private:
         const int kSegments = 100;
-        const float kTreeOffset = 8.f;
 
         Camera& camera;
 

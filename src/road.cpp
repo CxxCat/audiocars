@@ -7,12 +7,6 @@ Road::Road(Camera& camera): camera(camera), treeImages(4) {
     grassColors.emplace_back(66, 105, 33);
     grassColors.emplace_back(99, 138, 57);
 
-    for (int i = 0; i < kSegments; ++i) {
-        ofColor color = roadColors[i % roadColors.size()];
-        auto segment = std::make_shared<RoadSegment>(i, color);
-        segments.push_back(segment);
-        camera.drawByOrder.push_back(segment);
-    }
 }
 
 void Road::setup() {
@@ -20,14 +14,16 @@ void Road::setup() {
         treeImages[i].load("tree" + std::to_string(i) + ".png");
     }
 
-    for (int i = 0; i < segments.size(); ++i) {
-        ofVec3f treePosition(kTreeOffset, 0.f, segments[i]->positionZ);
-        auto tree = std::make_shared<Tree>(treePosition, treeImages[i % treeImages.size()]);
-        trees.push_back(tree);
-        camera.drawByOrder.push_back(tree);
+    for (int i = 0; i < kSegments; ++i) {
+        int colorID = i / 2;
+        ofColor color = roadColors[colorID % roadColors.size()];
+        auto segment = std::make_shared<RoadSegment>(i, color);
+        segments.push_back(segment);
+        camera.drawByOrder.push_back(segment);
 
-        treePosition.x *= -1;
-        tree = std::make_shared<Tree>(treePosition, treeImages[i % treeImages.size()]);
+        ofVec3f position(0.f, 0.f, segments[i]->positionZ);
+        int side = i % 2 == 0 ? -1 : 1;
+        auto tree = std::make_shared<Tree>(position, side, treeImages[i % treeImages.size()]);
         trees.push_back(tree);
         camera.drawByOrder.push_back(tree);
     }
@@ -56,8 +52,7 @@ void Road::draw() {
         } else {
             const float roadLen = kSegments * segments[i]->kSize.y;
             segments[i]->positionZ += roadLen;
-            trees[i * 2]->position.z += roadLen;
-            trees[i * 2 + 1]->position.z += roadLen;
+            trees[i]->position.z += roadLen;
         }
     }
 }

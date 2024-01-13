@@ -70,7 +70,7 @@ void Camera::draw() {
     const int winHeight = ofGetWindowHeight();
     const int winWidth = ofGetWindowWidth();
 
-    ofVec3f center = startRenderPosition() + ofVec3f(0.f, 0.f, 0.5f);
+    ofVec3f center = startRenderPosition() + ofVec3f(position.x, 0.f, 0.5f);
     ofVec2f scrSize = scaleByWidth(center, kCarWidth, carImg);
 
     ofVec2f scrCenter = worldToScreen(center);
@@ -82,3 +82,14 @@ void Camera::draw() {
         scrSize.y
     );
 }
+
+float Camera::alpha(float order) const {
+    if (drawByOrder.empty()) {
+        return 1.f;
+    }
+
+    float len = drawByOrder.front()->order() - drawByOrder.back()->order();
+    float ret = (drawByOrder.front()->order() - order) / len;
+    return std::min(ret * kAlpha, 1.f);
+}
+

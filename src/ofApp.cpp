@@ -11,6 +11,8 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    camera.position += direction.getNormalized() * kSpeed * ofGetLastFrameTime();
+
     camera.update();
 }
 
@@ -29,28 +31,42 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     switch (key) {
         case OF_KEY_UP:
-            camera.position += kSpeedZ;
+            direction.z = 1.f;
             break;
         case OF_KEY_DOWN:
-            camera.position -= kSpeedZ;
+            direction.z = -1.f;
             break;
         case OF_KEY_LEFT:
-            camera.position -= kSpeedX;
+            direction.x = -1.f;
             break;
         case OF_KEY_RIGHT:
-            camera.position += kSpeedX;
+            direction.x = 1.f;
             break;
         case 'a':
-            camera.position += kSpeedY;
+            direction.y = 1.f;
             break;
         case 'z':
-            camera.position -= kSpeedY;
+            direction.y -= 1.f;
             break;
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
+    switch (key) {
+        case OF_KEY_UP:
+        case OF_KEY_DOWN:
+            direction.z = 0.f;
+            break;
+        case OF_KEY_LEFT:
+        case OF_KEY_RIGHT:
+            direction.x = 0.f;
+            break;
+        case 'a':
+        case 'z':
+            direction.y = 0.f;
+            break;
+    }
 
 }
 
