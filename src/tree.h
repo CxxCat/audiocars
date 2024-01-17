@@ -14,9 +14,9 @@ class Tree: public IDrawable {
         void draw(const Camera& camera) override;
 
     private:
-        const float kWidth = 8.f;
-        const float kOffset = 20.f;
-        const float kRange = 12.f;
+        const float kWidth = 10.f;
+        const float kOffset = 60.f;
+        const float kRange = 50.f;
 
         ofImage image;
         float width = kWidth;

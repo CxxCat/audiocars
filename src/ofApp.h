@@ -1,6 +1,9 @@
 #pragma once
 
+#include <memory>
+
 #include "camera.h"
+#include "car.h"
 #include "ofMain.h"
 #include "road.h"
 
@@ -26,11 +29,13 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
     private:
-
-        const float kSpeed = 72.22f;
+        const float kSpeed = 10.f;
+        ofTrueTypeFont ttFont;
 
         ofVec3f direction = ofVec3f(0.f, 0.f, 0.f);
+        ofVec3f cameraOffset = ofVec3f(0.f, 0.f, 0.f);
 
         Camera camera;
+        std::shared_ptr<Car> car;
         Road road;
 };

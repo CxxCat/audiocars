@@ -12,7 +12,7 @@ class RoadSegment: public IDrawable {
 
         float positionZ = 0.f;
 
-        RoadSegment(int idx, const ofColor& color);
+        RoadSegment(int idx, const ofColor& fgColor, const ofColor& bgColor);
         float order() override;
         void draw(const Camera& camera) override;
 
@@ -20,7 +20,8 @@ class RoadSegment: public IDrawable {
         const float kLinesWidth = 0.6f;
 
         int idx = 0;
-        ofColor color;
+        ofColor fgColor;
+        ofColor bgColor;
 
         void drawRect(const std::vector<ofVec3f>& coords, const ofColor& color, const Camera& camera) const;
 };

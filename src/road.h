@@ -12,7 +12,7 @@ class Road {
         Road(Camera& camera);
 
         void setup();
-        void draw();
+        void update();
 
     private:
         const int kSegments = 100;

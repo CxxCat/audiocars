@@ -16,8 +16,9 @@ void Road::setup() {
 
     for (int i = 0; i < kSegments; ++i) {
         int colorID = i / 2;
-        ofColor color = roadColors[colorID % roadColors.size()];
-        auto segment = std::make_shared<RoadSegment>(i, color);
+        ofColor fgColor = roadColors[colorID % roadColors.size()];
+        ofColor bgColor = grassColors[colorID % grassColors.size()];
+        auto segment = std::make_shared<RoadSegment>(i, fgColor, bgColor);
         segments.push_back(segment);
         camera.drawByOrder.push_back(segment);
 
@@ -29,27 +30,14 @@ void Road::setup() {
     }
 }
 
-void Road::draw() {
-    const int winWidth = ofGetWindowWidth();
-
+void Road::update() {
     ofVec3f start = camera.startRenderPosition();
 
     for (int i = 0; i < segments.size(); ++i) {
         float beginZ = std::max(segments[i]->positionZ, start.z);
         float endZ = segments[i]->positionZ + segments[i]->kSize.y;
 
-        if (endZ > start.z) {
-            ofVec2f beginPos = camera.worldToScreen(ofVec3f(0.f, 0.f, beginZ));
-            ofVec2f endPos = camera.worldToScreen(ofVec3f(0.f, 0.f, endZ));
-
-            ofSetColor(grassColors[i % grassColors.size()]);
-            ofBeginShape();
-            ofVertex(0, beginPos.y);
-            ofVertex(winWidth, beginPos.y);
-            ofVertex(winWidth, endPos.y);
-            ofVertex(0, endPos.y);
-            ofEndShape();
-        } else {
+        if (endZ <= start.z) {
             const float roadLen = kSegments * segments[i]->kSize.y;
             segments[i]->positionZ += roadLen;
             trees[i]->position.z += roadLen;
