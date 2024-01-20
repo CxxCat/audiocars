@@ -10,7 +10,7 @@ ofVec2f Camera::worldToScreen(const ofVec3f& w) const {
     const int winWidth = ofGetWindowWidth();
 
     ofVec2f ret;
-    ret.y = (position.y + w.y) * scale.z * scale.y / (w.z - position.z);
+    ret.y = (position.y - w.y) * scale.z * scale.y / (w.z - position.z);
     ret.x = (w.x - position.x) * scale.z * scale.x / (w.z - position.z);
 
     transform(ret);

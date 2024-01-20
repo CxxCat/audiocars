@@ -1,8 +1,9 @@
 #include "car.h"
 
 Car::Car(const Camera& camera, float topSpeedKmph, float acc100Kmph) {
-    position = camera.startRenderPosition() + ofVec3f(0.f, 0.f, kOffset);
+    position = camera.startRenderPosition() + ofVec3f(0.f, 0.f, kOffset.z);
     topSpeed = kmphToMps(topSpeedKmph);
+    minSpeed = kmphToMps(kMinSpeedKmph);
     acceleration = kmphToMps(100.f) / acc100Kmph;
 }
 
@@ -27,23 +28,25 @@ void Car::draw(const Camera& camera) {
     );
 }
 
-void Car::move(ofVec3f direction, float dt) {
-    if (direction.z > 0) {
-        speed += acceleration * dt;
-    } else {
-        direction.z *= -1;
-        speed -= acceleration * dt;
+void Car::move(const ofVec3f& input, float dt) {
+    speed += acceleration * input.z * dt;
+    speed = ofClamp(speed, minSpeed, topSpeed);
+
+    direction = ofVec3f::zero();
+    direction.z = 1.f;
+    if (input.x > 0.f) {
+        direction.x = 1.f;
+    } else if (input.x < 0.f) {
+        direction.x = -1.f;
     }
-    speed = std::min(speed, topSpeed);
-    speed = std::max(speed, 0.f);
+    direction.normalize();
 
     position += direction * speed * dt;
-    position.x = std::min(position.x, kRangeX / 2.f);
-    position.x = std::max(position.x, -kRangeX / 2.f);
+    position.x = ofClamp(position.x, -kOffset.x, kOffset.x);
 }
 
 float Car::speedKmph() const {
-    return speed * 3600.f / 1000.f;  
+    return speed * 3600.f / 1000.f;
 }
 
 float Car::kmphToMps(float kmph) const {

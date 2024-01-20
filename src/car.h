@@ -17,18 +17,21 @@ class Car: public IDrawable {
         float order() override;
         void draw(const Camera& camera) override;
 
-        void move(ofVec3f direction, float dt);
+        void move(const ofVec3f& input, float dt);
         float speedKmph() const;
 
     private:
         const float kWidth = 2.f;
-        const float kOffset = 0.5f;
-        const float kRangeX = 10.f;
+        const ofVec3f kOffset = ofVec3f(5.f, 0.f, 0.5f);
+        const float kMinSpeedKmph = 40.f;
+
 
         ofImage image;
         float topSpeed = 0.f;
+        float minSpeed = 0.f;
         float acceleration = 0.f;
         float speed = 0.f;
+        ofVec3f direction = ofVec3f(0.f, 0.f, 0.f);
 
         float kmphToMps(float kmph) const;
 };

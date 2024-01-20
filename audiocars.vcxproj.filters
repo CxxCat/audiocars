@@ -22,6 +22,12 @@
     <ClCompile Include="src\car.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\audio_input_generator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controller_input_generator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -48,6 +54,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\car.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\audio_input_generator.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\controller_input_generator.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

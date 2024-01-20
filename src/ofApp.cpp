@@ -1,10 +1,27 @@
 #include "ofApp.h"
 
+void sumInput(const ofVec3f& input, ofVec3f& ret) {
+    if (input.x > 0) {
+        ret.x = std::max(input.x, ret.x);
+    } else if (input.x < 0) {
+        ret.x = std::min(input.x, ret.x);
+    }
+
+    if (input.z > 0) {
+        ret.z = std::max(input.z, ret.x);
+    } else if (input.z < 0) {
+        ret.z = std::min(input.z, ret.x);
+    }
+}
+
 ofApp::ofApp(): car(new Car(camera, 293.f, 4.2f)), road(camera)
 {}
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    soundPlayer.load("music.mp3");
+    soundPlayer.play();
+
     ttFont.load("arial.ttf", 32);
 
     road.setup();
@@ -17,10 +34,17 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     float dt = ofGetLastFrameTime();
-    car->move(direction.getNormalized(), dt);
+
+    soundPlayer.setVolume(static_cast<float>(!isMuted));
+
+    ofVec3f input = ofVec3f::zero();
+    sumInput(audioInputGenerator.input(), input);
+    sumInput(controllerInputGenerator.input(), input);
+
+    car->move(input, dt);
     camera.position = car->position - cameraOffset;
 
-    camera.screenTransform.x = sin(camera.position.z / 100.f);
+    //camera.screenTransform.x = sin(camera.position.z / 100.f);
     camera.screenTransform.y = cos(camera.position.z / 100.f) * 0.5f;
 
     road.update();
@@ -37,46 +61,26 @@ void ofApp::draw(){
     camera.draw();
     int speedKmph = static_cast<int>(car->speedKmph());
 
+
+    const int winHeight = ofGetWindowHeight();
     ofSetColor(ofColor::white);
-    ttFont.drawString(std::to_string(speedKmph), 100, 100);
+    ttFont.drawString(std::to_string(speedKmph) + " km/h", 10, winHeight - 60);
+
+    audioInputGenerator.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    switch (key) {
-        case OF_KEY_UP:
-            direction.z = 1.f;
-            break;
-        case OF_KEY_LEFT:
-            direction.x = -1.f;
-            break;
-        case OF_KEY_RIGHT:
-            direction.x = 1.f;
-            break;
-        case 'a':
-            direction.y = 1.f;
-            break;
-        case 'z':
-            direction.y -= 1.f;
-            break;
-    }
+    controllerInputGenerator.keyPressed(key);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    switch (key) {
-        case OF_KEY_UP:
-            direction.z = -1.f;
-            break;
-        case OF_KEY_LEFT:
-        case OF_KEY_RIGHT:
-            direction.x = 0.f;
-            break;
-        case 'a':
-        case 'z':
-            direction.y = 0.f;
-            break;
+    if (key == 'm') {
+        isMuted = !isMuted;
+        return;
     }
+    controllerInputGenerator.keyReleased(key);
 }
 
 //--------------------------------------------------------------

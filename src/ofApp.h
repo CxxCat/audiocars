@@ -2,8 +2,10 @@
 
 #include <memory>
 
+#include "audio_input_generator.h"
 #include "camera.h"
 #include "car.h"
+#include "controller_input_generator.h"
 #include "ofMain.h"
 #include "road.h"
 
@@ -32,10 +34,15 @@ class ofApp : public ofBaseApp{
         const float kSpeed = 10.f;
         ofTrueTypeFont ttFont;
 
-        ofVec3f direction = ofVec3f(0.f, 0.f, 0.f);
         ofVec3f cameraOffset = ofVec3f(0.f, 0.f, 0.f);
 
         Camera camera;
         std::shared_ptr<Car> car;
         Road road;
+
+        ofSoundPlayer soundPlayer;
+        bool isMuted = true;
+
+        AudioInputGenerator audioInputGenerator;
+        ControllerInputGenerator controllerInputGenerator;
 };

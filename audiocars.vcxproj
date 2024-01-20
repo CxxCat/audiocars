@@ -104,8 +104,10 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\audio_input_generator.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\car.cpp" />
+    <ClCompile Include="src\controller_input_generator.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\road.cpp" />
@@ -113,8 +115,10 @@
     <ClCompile Include="src\tree.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\audio_input_generator.h" />
     <ClInclude Include="src\camera.h" />
     <ClInclude Include="src\car.h" />
+    <ClInclude Include="src\controller_input_generator.h" />
     <ClInclude Include="src\idrawable.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\road.h" />
