@@ -41,7 +41,7 @@ class ofApp : public ofBaseApp{
         Road road;
 
         ofSoundPlayer soundPlayer;
-        bool isMuted = true;
+        bool isMuted = false;
 
         AudioInputGenerator audioInputGenerator;
         ControllerInputGenerator controllerInputGenerator;

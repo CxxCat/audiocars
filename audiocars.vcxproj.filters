@@ -62,6 +62,9 @@
     <ClInclude Include="src\controller_input_generator.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\ema.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

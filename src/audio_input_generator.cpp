@@ -1,17 +1,23 @@
 #include "audio_input_generator.h"
 
+AudioInputGenerator::AudioInputGenerator()
+    : fastEma(kEmaFastAlpha)
+    , slowEma(kEmaSlowAlpha)
+{}
+
 ofVec3f AudioInputGenerator::input() {
     spectrum = ofSoundGetSpectrum(kBands);
     float sum = 0.f;
     for (int i = 0; i < kBands; ++i) {
         sum += *(spectrum + i);
     }
-    ema = sum * kEmaAlpha + ema * (1.f - kEmaAlpha);
+    fastEma.add(sum);
+    slowEma.add(sum);
 
     ofVec3f ret;
-    if (sum > ema) {
+    if (fastEma.get() > slowEma.get()) {
         ret.z = 1.f;
-    } else if (sum < ema) {
+    } else if (fastEma.get() < slowEma.get()) {
         ret.z = -1.f;
     }
 

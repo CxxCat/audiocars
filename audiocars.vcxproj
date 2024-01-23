@@ -119,6 +119,7 @@
     <ClInclude Include="src\camera.h" />
     <ClInclude Include="src\car.h" />
     <ClInclude Include="src\controller_input_generator.h" />
+    <ClInclude Include="src\ema.h" />
     <ClInclude Include="src\idrawable.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\road.h" />
