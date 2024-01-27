@@ -8,6 +8,8 @@
 #include "controller_input_generator.h"
 #include "ofMain.h"
 #include "road.h"
+#include "road_manager.h"
+#include "spectrum.h"
 
 class ofApp : public ofBaseApp{
 
@@ -43,6 +45,8 @@ class ofApp : public ofBaseApp{
         ofSoundPlayer soundPlayer;
         bool isMuted = false;
 
+        Spectrum spectrum;
         AudioInputGenerator audioInputGenerator;
         ControllerInputGenerator controllerInputGenerator;
+        RoadManager roadManager;
 };

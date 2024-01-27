@@ -8,6 +8,9 @@
 
 class Car: public IDrawable {
     public:
+        const float kMinTurnSensivity = 0.1f;
+        const float kMaxTurnSensivity = 0.3f;
+
         ofVec3f position;
 
         Car(const Camera& camera, float topSpeedKmph, float acc100Kmph);
@@ -18,7 +21,9 @@ class Car: public IDrawable {
         void draw(const Camera& camera) override;
 
         void move(const ofVec3f& input, float dt);
+
         float speedKmph() const;
+        float speedRate() const;
 
     private:
         const float kWidth = 2.f;

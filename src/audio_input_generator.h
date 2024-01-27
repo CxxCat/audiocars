@@ -2,23 +2,17 @@
 
 #include "ema.h"
 #include "ofMain.h"
+#include "spectrum.h"
 
 class AudioInputGenerator {
     public:
-        AudioInputGenerator();
+        AudioInputGenerator(const Spectrum& spectrum);
         ofVec3f input();
-        void draw() const;
     private:
-        const int kBands = 200;
-        
-        const ofColor kColor = ofColor(255, 255, 255, 200);
-        const float kHeightPct = 0.8f;
-
         const float kEmaFastAlpha = 0.01f;
         const float kEmaSlowAlpha = 0.002f;
 
-        float* spectrum = nullptr;
-
+        const Spectrum& spectrum;
         EMA fastEma;
         EMA slowEma;
 };

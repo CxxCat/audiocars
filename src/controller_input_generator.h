@@ -8,5 +8,5 @@ class ControllerInputGenerator {
         void keyPressed(int key);
         void keyReleased(int key);
     private:
-         float stearingWheelPos = 0.f;
+         float steeringWheelPos = 0.f;
 };

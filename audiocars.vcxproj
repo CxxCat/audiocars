@@ -111,7 +111,9 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\road.cpp" />
+    <ClCompile Include="src\road_manager.cpp" />
     <ClCompile Include="src\road_segment.cpp" />
+    <ClCompile Include="src\spectrum.cpp" />
     <ClCompile Include="src\tree.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -123,7 +125,9 @@
     <ClInclude Include="src\idrawable.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\road.h" />
+    <ClInclude Include="src\road_manager.h" />
     <ClInclude Include="src\road_segment.h" />
+    <ClInclude Include="src\spectrum.h" />
     <ClInclude Include="src\tree.h" />
   </ItemGroup>
   <ItemGroup>

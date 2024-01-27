@@ -1,11 +1,8 @@
 #include "ofApp.h"
 
 void sumInput(const ofVec3f& input, ofVec3f& ret) {
-    if (input.x > 0) {
-        ret.x = std::max(input.x, ret.x);
-    } else if (input.x < 0) {
-        ret.x = std::min(input.x, ret.x);
-    }
+    ret.x += input.x;
+    ret.x = ofClamp(ret.x, -1.f, 1.f);
 
     if (input.z > 0) {
         ret.z = std::max(input.z, ret.x);
@@ -14,12 +11,16 @@ void sumInput(const ofVec3f& input, ofVec3f& ret) {
     }
 }
 
-ofApp::ofApp(): car(new Car(camera, 293.f, 4.2f)), road(camera)
-{}
+ofApp::ofApp()
+    : car(new Car(camera, 293.f, 4.2f))
+    , road(camera)
+    , audioInputGenerator(spectrum)
+    , roadManager(spectrum, car){
+}
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    soundPlayer.load("music.mp3");
+    soundPlayer.load("shape.mp3");
     soundPlayer.play();
 
     ttFont.load("arial.ttf", 32);
@@ -36,18 +37,20 @@ void ofApp::update(){
     float dt = ofGetLastFrameTime();
 
     soundPlayer.setVolume(static_cast<float>(!isMuted));
+    spectrum.update();
+
+    roadManager.update(dt);
+    road.update();
 
     ofVec3f input = ofVec3f::zero();
     sumInput(audioInputGenerator.input(), input);
     sumInput(controllerInputGenerator.input(), input);
+    sumInput(roadManager.input(), input);
 
     car->move(input, dt);
     camera.position = car->position - cameraOffset;
 
-    //camera.screenTransform.x = sin(camera.position.z / 100.f);
-    camera.screenTransform.y = cos(camera.position.z / 100.f) * 0.5f;
-
-    road.update();
+    camera.screenTransform = roadManager.transform();
     camera.update();
 }
 
@@ -58,15 +61,13 @@ void ofApp::draw(){
 
     ofBackgroundGradient(fromColor, toColor, OF_GRADIENT_BAR);
 
+    spectrum.draw();
     camera.draw();
     int speedKmph = static_cast<int>(car->speedKmph());
-
 
     const int winHeight = ofGetWindowHeight();
     ofSetColor(ofColor::white);
     ttFont.drawString(std::to_string(speedKmph) + " km/h", 10, winHeight - 60);
-
-    audioInputGenerator.draw();
 }
 
 //--------------------------------------------------------------

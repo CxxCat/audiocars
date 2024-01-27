@@ -17,6 +17,10 @@ void RoadSegment::draw(const Camera& camera) {
     const float beginZ = std::max(positionZ, start.z);
     const float endZ = positionZ + kSize.y;
 
+    float alpha = camera.alpha(order());
+    fgColor.a = 255 * alpha;
+    bgColor.a = 255 * alpha;
+
     ofVec2f beginPos = camera.worldToScreen(ofVec3f(0.f, 0.f, beginZ));
     ofVec2f endPos = camera.worldToScreen(ofVec3f(0.f, 0.f, endZ));
     ofSetColor(bgColor);

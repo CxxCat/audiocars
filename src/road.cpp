@@ -17,7 +17,7 @@ void Road::setup() {
     for (int i = 0; i < kSegments; ++i) {
         int colorID = i / 2;
         ofColor fgColor = roadColors[colorID % roadColors.size()];
-        ofColor bgColor = grassColors[colorID % grassColors.size()];
+        ofColor bgColor = grassColors[i % grassColors.size()];
         auto segment = std::make_shared<RoadSegment>(i, fgColor, bgColor);
         segments.push_back(segment);
         camera.drawByOrder.push_back(segment);

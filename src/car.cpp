@@ -39,6 +39,8 @@ void Car::move(const ofVec3f& input, float dt) {
     } else if (input.x < 0.f) {
         direction.x = -1.f;
     }
+    float invSpeedRate = 1.f - speedRate();
+    direction.x *= (kMinTurnSensivity + (kMaxTurnSensivity - kMinTurnSensivity) * invSpeedRate);
     direction.normalize();
 
     position += direction * speed * dt;
@@ -47,6 +49,10 @@ void Car::move(const ofVec3f& input, float dt) {
 
 float Car::speedKmph() const {
     return speed * 3600.f / 1000.f;
+}
+
+float Car::speedRate() const {
+    return speed / topSpeed;
 }
 
 float Car::kmphToMps(float kmph) const {

@@ -28,6 +28,12 @@
     <ClCompile Include="src\controller_input_generator.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\spectrum.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\road_manager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -63,6 +69,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\ema.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\spectrum.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\road_manager.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

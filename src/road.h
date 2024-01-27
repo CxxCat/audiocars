@@ -15,7 +15,7 @@ class Road {
         void update();
 
     private:
-        const int kSegments = 100;
+        const int kSegments = 88;
 
         Camera& camera;
 
