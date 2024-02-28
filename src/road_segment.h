@@ -8,7 +8,7 @@
 
 class RoadSegment: public IDrawable {
     public:
-        const ofVec2f kSize = ofVec2f(9.f, 4.f);
+        const ofVec2f kSize = ofVec2f(9.f, 2.f);
 
         float positionZ = 0.f;
 

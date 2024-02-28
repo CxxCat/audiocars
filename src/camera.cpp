@@ -62,7 +62,9 @@ void Camera::update() {
 
 void Camera::draw() {
     for (const auto& iDraw : drawByOrder) {
-        iDraw->draw(*this);
+        if (iDraw->order() >= minOrder()) {
+            iDraw->draw(*this);
+        }
     }
 
 }
@@ -71,8 +73,8 @@ float Camera::alpha(float order) const {
     if (drawByOrder.empty()) {
         return 1.f;
     }
-
-    float len = drawByOrder.front()->order() - drawByOrder.back()->order();
+    
+    float len = drawByOrder.front()->order() - minOrder();
     float ret = (drawByOrder.front()->order() - order) / len;
     return std::min(ret * kAlpha, 1.f);
 }
@@ -92,3 +94,6 @@ void Camera::transform(ofVec2f& scrCoords) const {
     }
 }
 
+float Camera::minOrder() const {
+    return startRenderPosition().z;
+}

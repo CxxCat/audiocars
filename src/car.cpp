@@ -1,7 +1,7 @@
 #include "car.h"
 
-Car::Car(const Camera& camera, float topSpeedKmph, float acc100Kmph) {
-    position = camera.startRenderPosition() + ofVec3f(0.f, 0.f, kOffset.z);
+Car::Car(const ofVec3f& pos, float topSpeedKmph, float acc100Kmph) {
+    position = pos + ofVec3f(0.f, 0.f, kOffset.z);
     topSpeed = kmphToMps(topSpeedKmph);
     minSpeed = kmphToMps(kMinSpeedKmph);
     acceleration = kmphToMps(100.f) / acc100Kmph;
@@ -19,7 +19,7 @@ void Car::draw(const Camera& camera) {
     ofVec2f scrSize = camera.scaleByWidth(position, kWidth, image);
 
     ofVec2f scrPosition = camera.worldToScreen(position);
-    ofSetColor(ofColor::white);
+    ofSetColor(ofColor(255, 255, 255, 255 * camera.alpha(order())));
     image.draw(
         scrPosition.x - scrSize.x / 2,
         scrPosition.y - scrSize.y,

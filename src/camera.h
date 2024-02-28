@@ -25,9 +25,11 @@ class Camera {
 
     private:
         const float kCarWidth = 2.f;
-        const float kAlpha = 4.f;
+        const float kAlpha = 2.f;
 
         ofVec3f scale = ofVec3f(1.f, 1.f, 1.f);
 
         void transform(ofVec2f& scrCoords) const;
+
+        float minOrder() const;
 };

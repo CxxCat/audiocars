@@ -34,6 +34,12 @@
     <ClCompile Include="src\road_manager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\npc_manager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\background.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -75,6 +81,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\road_manager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\npc_manager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\background.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

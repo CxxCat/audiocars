@@ -12,20 +12,24 @@ void sumInput(const ofVec3f& input, ofVec3f& ret) {
 }
 
 ofApp::ofApp()
-    : car(new Car(camera, 293.f, 4.2f))
+    : car(new Car(camera.startRenderPosition(), 293.f, 4.2f))
     , road(camera)
+    , background(spectrum)
     , audioInputGenerator(spectrum)
-    , roadManager(spectrum, car){
+    , roadManager(spectrum, car)
+    , npcManager(spectrum, camera){
 }
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    soundPlayer.load("shape.mp3");
+    soundPlayer.load("music.mp3");
     soundPlayer.play();
 
     ttFont.load("arial.ttf", 32);
 
     road.setup();
+    background.setup();
+    npcManager.setup();
     car->setup("car0.png");
     camera.drawByOrder.push_back(car);
 
@@ -40,6 +44,7 @@ void ofApp::update(){
     spectrum.update();
 
     roadManager.update(dt);
+    npcManager.update(dt);
     road.update();
 
     ofVec3f input = ofVec3f::zero();
@@ -50,18 +55,16 @@ void ofApp::update(){
     car->move(input, dt);
     camera.position = car->position - cameraOffset;
 
-    camera.screenTransform = roadManager.transform();
+    ofVec2f screenTransform = roadManager.transform();
+    camera.screenTransform = screenTransform;
     camera.update();
+    background.screenTransform = screenTransform;
+    background.update(dt);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofColor fromColor(231, 249, 245);
-    ofColor toColor(221, 196, 252);
-
-    ofBackgroundGradient(fromColor, toColor, OF_GRADIENT_BAR);
-
-    spectrum.draw();
+    background.draw();
     camera.draw();
     int speedKmph = static_cast<int>(car->speedKmph());
 

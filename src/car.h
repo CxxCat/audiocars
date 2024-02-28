@@ -13,7 +13,7 @@ class Car: public IDrawable {
 
         ofVec3f position;
 
-        Car(const Camera& camera, float topSpeedKmph, float acc100Kmph);
+        Car(const ofVec3f& pos, float topSpeedKmph, float acc100Kmph);
 
         void setup(const std::string& imgPath);
 
@@ -28,7 +28,7 @@ class Car: public IDrawable {
     private:
         const float kWidth = 2.f;
         const ofVec3f kOffset = ofVec3f(5.f, 0.f, 0.5f);
-        const float kMinSpeedKmph = 40.f;
+        const float kMinSpeedKmph = 80.f;
 
 
         ofImage image;

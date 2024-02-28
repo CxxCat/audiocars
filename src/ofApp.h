@@ -3,9 +3,11 @@
 #include <memory>
 
 #include "audio_input_generator.h"
+#include "background.h"
 #include "camera.h"
 #include "car.h"
 #include "controller_input_generator.h"
+#include "npc_manager.h"
 #include "ofMain.h"
 #include "road.h"
 #include "road_manager.h"
@@ -46,7 +48,9 @@ class ofApp : public ofBaseApp{
         bool isMuted = false;
 
         Spectrum spectrum;
+        Background background;
         AudioInputGenerator audioInputGenerator;
         ControllerInputGenerator controllerInputGenerator;
         RoadManager roadManager;
+        NpcManager npcManager;
 };

@@ -55,14 +55,7 @@ ofVec2f RoadManager::transform() {
 
 ofVec3f RoadManager::input() {
     ofVec3f ret = ofVec3f::zero();
-    switch (state) {
-        case State::LeftTurn:
-            ret.x = 0.5f;
-            break;
-        case State::RightTurn:
-            ret.x = -0.5f;
-    }
-    ret.x *= abs(currTransform.x);
+    ret.x = -0.5f * currTransform.x;
     return ret;
 }
 
